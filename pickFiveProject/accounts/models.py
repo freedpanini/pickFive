@@ -72,6 +72,17 @@ class Picks(models.Model):
         return "Your pick id is:" + self.PickID
 
 
+class Teams(models.Model):
+
+    TeamID = models.AutoField(primary_key=True)  # team id, which is the primary key
+    TeamName = models.CharField(max_length=30)  # team name
+
+    def __str__(self):
+        return (
+            "Your team id is:" + self.TeamID + "and the team name is:" + self.TeamName
+        )
+
+
 class Spreads(models.Model):
 
     SpreadID = models.AutoField(primary_key=True)  # spread id, which is the primary key
@@ -102,17 +113,6 @@ class Spreads(models.Model):
             + self.Year
             + "and week"
             + self.Week
-        )
-
-
-class Teams(models.Model):
-
-    TeamID = models.AutoField(primary_key=True)  # team id, which is the primary key
-    TeamName = models.CharField(max_length=30)  # team name
-
-    def __str__(self):
-        return (
-            "Your team id is:" + self.TeamID + "and the team name is:" + self.TeamName
         )
 
 
