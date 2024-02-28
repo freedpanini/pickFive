@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Account, Group, GroupXAccount, Picks, Spreads, Teams, Outcomes
+from .models import Account, Group, GroupXAccount, Picks, Spreads, Teams, Outcomes
 
 # Register your models here.
 admin.site.register(Account)

@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
 class Account(models.Model):
 
     AccountID = models.AutoField(
@@ -55,23 +54,6 @@ class GroupXAccount(models.Model):
         return "Your group x account id is:" + self.GroupXAccountID
 
 
-class Picks(models.Model):
-
-    PickID = models.AutoField(primary_key=True)  # pick id, which is the primary key
-    GroupXAccountID = models.ForeignKey(
-        GroupXAccount, on_delete=models.CASCADE
-    )  # group x account id - a group x account id, cascade delete
-    PickName = models.CharField(max_length=30)  # pick name
-    PickText = models.TextField()  # pick text
-    # PickDate = models.DateField()  # pick date
-    SpreadID = models.ForeignKey(
-        Spread, on_delete=models.RESTRICT
-    )  # spread id - a spread id, restrict delete
-
-    def __str__(self):
-        return "Your pick id is:" + self.PickID
-
-
 class Teams(models.Model):
 
     TeamID = models.AutoField(primary_key=True)  # team id, which is the primary key
@@ -114,6 +96,23 @@ class Spreads(models.Model):
             + "and week"
             + self.Week
         )
+
+
+class Picks(models.Model):
+
+    PickID = models.AutoField(primary_key=True)  # pick id, which is the primary key
+    GroupXAccountID = models.ForeignKey(
+        GroupXAccount, on_delete=models.CASCADE
+    )  # group x account id - a group x account id, cascade delete
+    PickName = models.CharField(max_length=30)  # pick name
+    PickText = models.TextField()  # pick text
+    # PickDate = models.DateField()  # pick date
+    SpreadID = models.ForeignKey(
+        Spreads, on_delete=models.RESTRICT
+    )  # spread id - a spread id, restrict delete
+
+    def __str__(self):
+        return "Your pick id is:" + self.PickID
 
 
 class Outcomes(models.Model):
