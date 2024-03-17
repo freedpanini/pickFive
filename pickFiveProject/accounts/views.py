@@ -8,10 +8,18 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from groups.models import *
   
   
 #################### index####################################### 
 def index(request):
+    available_groups = Group.objects.filter(IsPublic = True, IsActive = True)
+    user_groups = GroupXAccount.objects.filter(Account= request.user)
+    print("user", request.user)
+
+    print("GROUPS", available_groups)
+    print("USEr GROUPS", user_groups)
+
     return render(request, 'index.html', {'title':'index'})
   
 ########### register here ##################################### 

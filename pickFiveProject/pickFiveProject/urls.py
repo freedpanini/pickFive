@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 from accounts import views as accounts_view
+from groups import views as groups_view
 from django.contrib.auth import views as auth
 
 urlpatterns = [
@@ -25,5 +26,7 @@ urlpatterns = [
     path('login/', accounts_view.login, name ='login'),
     path('logout/', auth.LogoutView.as_view(template_name ='index.html'), name ='logout'),
     path('register/', accounts_view.register, name ='register'),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('createGroup/', groups_view.register, name ='register')
+
 ]

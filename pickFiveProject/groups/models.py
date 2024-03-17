@@ -7,7 +7,7 @@ class Group(models.Model):
 
     GroupID = models.AutoField(primary_key=True)  # group id, which is the primary key
     GroupName = models.CharField(max_length=30)  # group name
-    AdminID = models.ForeignKey(
+    Admin = models.ForeignKey(
         Account, on_delete=models.RESTRICT  # IS THIS RIGHT?
     )  # admin id - an account id, restrict delete
     IsPublic = models.BooleanField()  # is the group public or private
@@ -24,12 +24,12 @@ class GroupXAccount(models.Model):
     GroupXAccountID = models.AutoField(
         primary_key=True
     )  # group x account id, which is the primary key
-    GroupID = models.ForeignKey(
+    Group = models.ForeignKey(
         Group, on_delete=models.CASCADE
     )  # group id - a group id, cascade delete
-    AccountID = models.ForeignKey(
+    Account = models.ForeignKey(
         Account, on_delete=models.CASCADE
     )  # account id - an account id, cascade delete
 
     def __str__(self):
-        return "Your group x account id is:" + self.GroupXAccountID
+        return "Your group x account id is:" + str(self.GroupXAccountID)
