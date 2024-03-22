@@ -14,13 +14,14 @@ from groups.models import *
 #################### index####################################### 
 def index(request):
     available_groups = Group.objects.filter(IsPublic = True, IsActive = True)
-    user_groups = GroupXAccount.objects.filter(Account= request.user)
+    user_groups = GroupXAccount.objects.filter(Account= request.user).select_related()
     print("user", request.user)
 
     print("GROUPS", available_groups)
     print("USEr GROUPS", user_groups)
 
-    return render(request, 'index.html', {'title':'index'})
+    context = {'title':'index', 'available_groups': available_groups, 'user_groups':user_groups}
+    return render(request, 'index.html',context)
   
 ########### register here ##################################### 
 def register(request):

@@ -91,6 +91,29 @@
 	{% else %}
 	<center><h1>log in, plz . . .</h1></center>
 	{% endif %}
+
+	<div>
+		<center><h3>PUBLIC GROUPS</h3></center>
+	</div>
+
+
+	<center>
+			{% for x in available_groups %}
+			  <p>{{ x.GroupName }}</p>
+			{% endfor %}
+	</center>
+
+	<div>
+		<center><h3>USER GROUPS</h3></center>
+	</div>
+
+
+	<center>
+			{% for x in user_groups %}
+			  <p>{{ x.Group.GroupName }}</p>
+			{% endfor %}
+	</center>
+
 	{% endblock %}
 </div>
 </body>
