@@ -27,6 +27,8 @@ urlpatterns = [
     path('logout/', auth.LogoutView.as_view(template_name ='index.html'), name ='logout'),
     path('register/', accounts_view.register, name ='register'),
     path('admin/', admin.site.urls),
-    path('createGroup/', groups_view.register, name ='register')
+    path('createGroup/', groups_view.register, name ='createGroup'),
+    path('group/<int:group_id>', groups_view.group, name ='group')
+
 
 ]

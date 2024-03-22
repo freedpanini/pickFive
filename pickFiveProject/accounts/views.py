@@ -9,16 +9,13 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 from groups.models import *
-  
+
   
 #################### index####################################### 
+@login_required
 def index(request):
     available_groups = Group.objects.filter(IsPublic = True, IsActive = True)
     user_groups = GroupXAccount.objects.filter(Account= request.user).select_related()
-    print("user", request.user)
-
-    print("GROUPS", available_groups)
-    print("USEr GROUPS", user_groups)
 
     context = {'title':'index', 'available_groups': available_groups, 'user_groups':user_groups}
     return render(request, 'index.html',context)
@@ -48,7 +45,6 @@ def login(request):
         user = authenticate(request, username = username, password = password)
         if user is not None:
             form = login_auth(request, user)
-            messages.success(request, f' welcome {username} !!')
             return redirect('index')
         else:
             messages.info(request, f'account done not exit plz sign in')

@@ -16,7 +16,7 @@ class Group(models.Model):
     UpdatedAt = models.DateTimeField(auto_now=True)  # last time the group was updated
 
     def __str__(self):
-        return "Your group name is:" + self.GroupName
+        return "Your group name is:" + self.GroupName + " ID: " + str(self.GroupID)
 
 
 class GroupXAccount(models.Model):

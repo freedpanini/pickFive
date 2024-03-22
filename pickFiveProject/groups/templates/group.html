@@ -87,62 +87,39 @@
 <div class="row">
 	{% block start %}
 	{% if user.is_authenticated %}
-	<center><h1>welcome back {{user.username}}!</h1></center>
+	<center><h1>Group: {{group.GroupName}}!</h1></center>
+
 
 	<div>
-		<center><h3>PUBLIC GROUPS</h3></center>
+		<center><h3>Current Users</h3></center>
 	</div>
 
 
 	<center>
-		<table>
-			<tr>
-				<th>Group Name</th>
-	
-				<th>Link</th>
-			</tr>
-			{% for x in available_groups %}
-		<tr> 
-			<td>{{ x.GroupName}}</td>
-
-			<td><a href="{% url 'group' x.GroupID%}"> View</a></td>
-		</tr>
-		  
-		{% endfor %}
-		</table>
-	</center>
-
-	<div>
-		<center><h3>USER GROUPS</h3></center>
-	</div>
-
-
-	<center>
-			
-
-			<table>
-				<tr>
-					<th>Group Name</th>
-	
-					<th>Link</th>
-				</tr>
-				{% for x in user_groups %}
-			<tr> 
-				<td>{{ x.Group.GroupName }}</td>
-
-				<td><a href="{% url 'group' x.Group.GroupID%}"> View</a></td>
-			</tr>
-			  
+			{% for x in group_users %}
+			  <p>{{ x.Account.username }}</p>
 			{% endfor %}
-			</table>
-
-			<div>
-				<center><h3><a href="{% url 'createGroup'%}"> Create Group</a></h3></center>
-			</div>	
 	</center>
+
+	<center>
+	{% if is_member %}
+	<form method="POST" action = "{% url 'group' group.GroupID%}">
+		{% csrf_token %}
+		<input type="submit" name="action" value="LEAVE"/>
+	</form>
+	{% else %}
+	<form method="POST"  action = "{% url 'group' group.GroupID%}">
+		{% csrf_token %}
+		<input type="submit" name="action" value="JOIN"/>
+	</form>
+	{% endif %}
+	</center>
+	
 	{% else %}
 	<center><h1>log in, plz . . .</h1></center>
 	{% endif %}
+
+
 
 	{% endblock %}
 </div>
